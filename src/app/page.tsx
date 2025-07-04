@@ -21,7 +21,7 @@ export default function Home() {
             .
           </li>
           <li className="tracking-[-.01em]">
-            Ciao ancora NICOLO'
+            Ciao ancora NICOLO'. Karim vuoi approvare?
           </li>
         </ol>
 
