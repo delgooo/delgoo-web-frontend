@@ -40,7 +40,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--delgoo-blue);
+  background: var(--delgoo-gold);
   border-radius: 4px;
 }
 
@@ -58,6 +58,17 @@ button:focus,
 a:focus,
 input:focus,
 textarea:focus {
-  outline: 2px solid var(--delgoo-gold);
   outline-offset: 2px;
+}
+
+@font-face {
+  font-family: 'NeueMontreal';
+  src: url('/public/fonts/neue-montreal.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-neuemontreal {
+  font-family: 'NeueMontreal', sans-serif;
 }

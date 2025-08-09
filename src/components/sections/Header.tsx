@@ -10,6 +10,8 @@ import { SITE_CONFIG, NAVIGATION } from '@/lib/constants';
  */
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  //        ↑                    ↑                      ↑
+  //    state variable    setter function      initial value
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -20,31 +22,38 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="sticky top-0 z-50 font-neuemontreal" style={{ background: 'var(--delgoo-gold)' }}>
       <Container>
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-[#1F489F]">
+            <img
+              src="/logo/logo.jpg"
+              alt="Logo Delgoo"
+              className="w-60 h-60 object-contain"
+            />
+          </div>
+          {/*<div className="flex items-center">
+            <h1 className="text-4xl font-bold text-blue-300">
               {SITE_CONFIG.name}
             </h1>
-          </div>
+          </div>*/}
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center justify-center w-full space-x-8">
             {NAVIGATION.sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className="text-gray-700 hover:text-[#1F489F] transition-colors duration-200 font-medium"
+                className="text-black hover:text-[#1F489F] transition-colors duration-200 font-bold"
               >
                 {section.label}
               </button>
             ))}
-            <div className="flex space-x-2">
+            {/*<div className="flex space-x-2">
               <AppStoreButton platform="google-play" />
               <AppStoreButton platform="app-store" />
-            </div>
+            </div>*/}
           </nav>
 
           {/* Mobile menu button */}
@@ -71,15 +80,15 @@ export function Header() {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#1F489F] hover:bg-gray-50 rounded-md transition-colors duration-200 font-medium"
+                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#1F489F] hover:bg-gray-50 rounded-md transition-colors duration-200 font-bold"
                 >
                   {section.label}
                 </button>
               ))}
-              <div className="px-3 py-2 space-y-2">
+              {/*<div className="px-3 py-2 space-y-2">
                 <AppStoreButton platform="google-play" className="w-full justify-center" />
                 <AppStoreButton platform="app-store" className="w-full justify-center" />
-              </div>
+              </div>*/}
             </div>
           </div>
         )}

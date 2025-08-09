@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from '@/components/ui/Container';
+import { AppStoreButton } from '@/components/ui/AppStoreButton';
 import { BENEFITS } from '@/lib/constants';
 
 /**
@@ -7,7 +8,7 @@ import { BENEFITS } from '@/lib/constants';
  */
 export function Benefits() {
   return (
-    <section id="benefits" className="py-12 bg-gray-50">
+    <section id="benefits" className="py-12 bg-yellow-100 font-neuemontreal">
       <Container>
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -69,6 +70,26 @@ export function Benefits() {
             <p className="text-sm text-gray-600">Follow your package&apos;s journey in real-time</p>
           </div>
         </div>
+
+          {/* CTA Section */}
+        <div className="text-center mt-8">
+          <div className="bg-gradient-to-r from-[#FFAB0C] to-[#FFB52E] rounded-xl p-6 text-gray-900">
+            <h3 className="text-xl font-bold mb-3">
+              Ready to Get Started?
+            </h3>
+            <p className="text-base mb-4 opacity-90">
+              Be among the first to experience the future of delivery.
+            </p>
+            <p className="text-2xl font-bold mb-4">
+              COMING SOON!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <AppStoreButton platform="google-play" />
+              <AppStoreButton platform="app-store" />
+            </div>
+          </div>
+        </div>
+
       </Container>
     </section>
   );

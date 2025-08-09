@@ -9,7 +9,7 @@ import { FAQ_ITEMS } from '@/lib/constants';
  */
 export function FAQ() {
   return (
-    <section id="faq" className="py-12 bg-white">
+    <section id="faq" className="py-12 bg-blue-100 font-neuemontreal">
       <Container>
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -26,7 +26,7 @@ export function FAQ() {
 
         {/* Contact CTA */}
         <div className="text-center mt-8">
-          <div className="bg-gradient-to-r from-[#1F489F] to-[#2d5bb8] rounded-xl p-6 text-white">
+          <div className="bg-gradient-to-r from-[#FFAB0C] to-[#FFB52E] rounded-xl p-6 text-gray-900">
             <h3 className="text-xl font-bold mb-3">
               Still Have Questions?
             </h3>

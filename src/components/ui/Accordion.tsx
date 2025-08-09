@@ -16,7 +16,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
   return (
     <div className="border-b border-gray-200 last:border-b-0">
       <button
-        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1F489F] focus:ring-inset"
+        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-yellow-50 transition-colors duration-200 focus:outline-none focus:ring-0"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
