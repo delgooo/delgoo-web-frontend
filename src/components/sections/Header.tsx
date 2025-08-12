@@ -10,8 +10,6 @@ import { SITE_CONFIG, NAVIGATION } from '@/lib/constants';
  */
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  //        ↑                    ↑                      ↑
-  //    state variable    setter function      initial value
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -22,73 +20,65 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 font-neuemontreal bg-white" style={{ background: 'var(--delgoo-gold)' }}>
+    <header className="sticky top-0 z-50 font-neuemontreal">
+      {/* Modern background */}
+      <div className="absolute inset-0 bg-white border-b border-gray-200 shadow-soft"></div>
+      
       <Container>
-        <div className="flex items-center justify-between h-20">
+        <div className="relative z-10 flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src="/logo/logo.jpg"
-              alt="Logo Delgoo"
-              className="w-60 h-60 object-contain"
-            />
+            <div className="relative group">
+              <img 
+                src="/logo/logo.jpg" 
+                alt="Delgoo" 
+                className="h-12 w-auto rounded-2xl shadow-medium ring-1 ring-gray-100 transition-all duration-300 group-hover:shadow-large group-hover:scale-105" 
+              />
+              <div className="absolute inset-0 bg-blue-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
           </div>
-          {/*<div className="flex items-center">
-            <h1 className="text-4xl font-bold text-blue-300">
-              {SITE_CONFIG.name}
-            </h1>
-          </div>*/}
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center justify-center w-full space-x-8">
+          <nav className="hidden md:flex items-center justify-center w-full gap-8">
             {NAVIGATION.sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className="text-black hover:text-[#1F489F] transition-colors duration-200 font-bold"
+                className="relative text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium group"
               >
                 {section.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
-            {/*<div className="flex space-x-2">
-              <AppStoreButton platform="google-play" />
-              <AppStoreButton platform="app-store" />
-            </div>*/}
           </nav>
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-[#1F489F] hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#1F489F]"
+            className="md:hidden p-3 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            <div className="relative w-6 h-6">
+              <span className={`absolute inset-0 w-6 h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'}`}></span>
+              <span className={`absolute inset-0 w-6 h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+              <span className={`absolute inset-0 w-6 h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'}`}></span>
+            </div>
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+            <div className="px-4 pt-4 pb-6 space-y-2 bg-white border-t border-gray-200 shadow-medium rounded-b-3xl">
               {NAVIGATION.sections.map((section) => (
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#1F489F] hover:bg-gray-50 rounded-md transition-colors duration-200 font-bold"
+                  className="block w-full text-left px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-2xl transition-all duration-300 font-medium"
                 >
                   {section.label}
                 </button>
               ))}
-              {/*<div className="px-3 py-2 space-y-2">
-                <AppStoreButton platform="google-play" className="w-full justify-center" />
-                <AppStoreButton platform="app-store" className="w-full justify-center" />
-              </div>*/}
             </div>
           </div>
         )}

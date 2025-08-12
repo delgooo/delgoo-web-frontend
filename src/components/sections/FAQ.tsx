@@ -9,36 +9,54 @@ import { FAQ_ITEMS } from '@/lib/constants';
  */
 export function FAQ() {
   return (
-    <section id="faq" className="py-12 bg-blue-100 font-neuemontreal">
+    <section id="faq" className="relative py-20 font-neuemontreal overflow-hidden geometric-bg">
+      {/* Modern Background Elements */}
+      <div className="absolute inset-0 bg-gray-50"></div>
+      <div className="absolute top-0 left-1/4 w-80 h-80 bg-blue-100 rounded-full opacity-60"></div>
+      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-yellow-100 rounded-full opacity-60"></div>
+      
+      {/* Pattern Overlay */}
+      <div className="absolute inset-0 bg-pattern-hex opacity-10"></div>
+      
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Frequently Asked Questions
+        <div className="relative z-10 text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full border border-blue-200 mb-6">
+            <span className="text-sm font-semibold text-blue-700">❓ FAQ</span>
+          </div>
+          
+          <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
+            Frequently Asked <span className="solid-text">Questions</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Find answers to the most common questions about Delgoo
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto mb-16">
           <Accordion items={FAQ_ITEMS} />
         </div>
 
         {/* Contact CTA */}
-        <div className="text-center mt-8">
-          <div className="bg-gradient-to-r from-[#FFAB0C] to-[#FFB52E] rounded-xl p-6 text-gray-900">
-            <h3 className="text-xl font-bold mb-3">
-              Still Have Questions?
-            </h3>
-            <p className="text-base mb-4 opacity-90">
-              Our support team is here to help you with any questions or concerns.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <AppStoreButton platform="google-play" />
-              <AppStoreButton platform="app-store" />
-              <button className="border-2 border-white text-white hover:bg-white hover:text-[#1F489F] font-bold py-3 px-6 rounded-lg transition-colors duration-200">
-                View Help Center
-              </button>
+        <div className="text-center">
+          <div className="relative bg-blue-500 rounded-modern-lg p-8 text-white shadow-large ring-1 ring-blue-400 border border-blue-400 overflow-hidden">
+            {/* Modern background decoration */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full"></div>
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-bold mb-4">
+                Still Have Questions?
+              </h3>
+              <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
+                Our support team is here to help you with any questions or concerns.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <AppStoreButton platform="google-play" />
+                <AppStoreButton platform="app-store" />
+                <button className="px-6 py-3 bg-white/20 text-white hover:bg-white hover:text-blue-600 font-semibold rounded-2xl transition-all duration-300 border border-white/30 hover:shadow-medium">
+                  View Help Center
+                </button>
+              </div>
             </div>
           </div>
         </div>

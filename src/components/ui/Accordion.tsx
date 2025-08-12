@@ -14,21 +14,23 @@ interface AccordionItemProps {
  */
 function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <div className="border-b border-gray-200 last:border-b-0 group">
       <button
-        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-yellow-50 transition-colors duration-200 focus:outline-none focus:ring-0"
+        className="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-blue-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-2xl mx-2 my-1"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
-        <span className="font-medium text-gray-900 pr-4">{question}</span>
-        <span className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
-          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+        <span className="font-semibold text-gray-900 pr-4 text-lg">{question}</span>
+        <span className={`transform transition-all duration-300 ${isOpen ? 'rotate-180 scale-110' : 'scale-100'}`}>
+          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-medium">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="px-6 pb-4 text-gray-600 leading-relaxed">
+      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="px-8 pb-6 text-gray-600 leading-relaxed text-base">
           {answer}
         </div>
       </div>
@@ -61,7 +63,7 @@ export function Accordion({ items }: AccordionProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="bg-white rounded-modern-lg shadow-large ring-1 ring-gray-100 border border-gray-200 overflow-hidden">
       {items.map((item) => (
         <AccordionItem
           key={item.id}
