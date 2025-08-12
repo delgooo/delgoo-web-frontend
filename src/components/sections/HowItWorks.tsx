@@ -7,7 +7,7 @@ import { HOW_IT_WORKS } from '@/lib/constants';
  */
 export function HowItWorks() {
   return (
-         <section id="how-it-works" className="py-12 font-neuemontreal" style={{ background: 'var(--delgoo-blue)' }}>
+         <section id="how-it-works" className="py-12 font-neuemontreal bg-white">
       <Container>
         <div className="text-center mb-8">
           {/* <h2 className="text-3xl font-bold mb-4" style={{ color: '#FFAB0C' }}> */}
@@ -30,7 +30,7 @@ export function HowItWorks() {
                  {/* Timeline image and text */}
                  <div className="flex flex-col items-center text-center">
                                        <img 
-                      src={`/main/${index + 1}.jpg`} 
+                      src={`/main/${index + 1}.png`} 
                       alt={`Step ${index + 1}`}
                       className="w-auto h-auto max-w-xs rounded-lg shadow-lg mb-2"
                       style={{ objectPosition: 'center' }}

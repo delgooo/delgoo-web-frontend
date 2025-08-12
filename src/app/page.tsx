@@ -39,8 +39,8 @@ export default function HomePage() { /** HomePage component exportable via "defa
     <main className="min-h-screen"> {/* min-h-screen is a Tailwind CSS class that sets the minimum height of the page to the screen height */}
       <Header />
       <Hero />
-      <section id="home" className="py-2 bg-yellow-200"></section>
-      <section id="home" className="py-2 bg-blue-200"></section>
+      {/*<section id="home" className="py-2 bg-yellow-200"></section>
+      <section id="home" className="py-2 bg-blue-200"></section>*/}
       <HowItWorks />
       <Benefits />
       <FAQ />

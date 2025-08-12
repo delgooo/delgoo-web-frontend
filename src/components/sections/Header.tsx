@@ -22,7 +22,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 font-neuemontreal" style={{ background: 'var(--delgoo-gold)' }}>
+    <header className="sticky top-0 z-50 font-neuemontreal bg-white" style={{ background: 'var(--delgoo-gold)' }}>
       <Container>
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
