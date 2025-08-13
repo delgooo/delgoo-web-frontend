@@ -29,7 +29,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
           </div>
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
         <div className="px-8 pb-6 text-gray-600 leading-relaxed text-base">
           {answer}
         </div>
@@ -50,7 +50,7 @@ interface AccordionProps {
  * Accordion component for FAQ section
  */
 export function Accordion({ items }: AccordionProps) {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set());
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([1])); // Open first item by default
 
   const toggleItem = (id: number) => {
     const newOpenItems = new Set(openItems);
@@ -62,17 +62,29 @@ export function Accordion({ items }: AccordionProps) {
     setOpenItems(newOpenItems);
   };
 
+  // Debug: Log the items to see what we're receiving
+  console.log('FAQ Items received:', items);
+  console.log('FAQ Items length:', items?.length);
+  console.log('FAQ Items structure:', JSON.stringify(items, null, 2));
+
   return (
     <div className="bg-white rounded-modern-lg shadow-large ring-1 ring-gray-100 border border-gray-200 overflow-hidden">
-      {items.map((item) => (
-        <AccordionItem
-          key={item.id}
-          question={item.question}
-          answer={item.answer}
-          isOpen={openItems.has(item.id)}
-          onToggle={() => toggleItem(item.id)}
-        />
-      ))}
+      {items && items.length > 0 ? (
+        items.map((item) => (
+          <AccordionItem
+            key={item.id}
+            question={item.question}
+            answer={item.answer}
+            isOpen={openItems.has(item.id)}
+            onToggle={() => toggleItem(item.id)}
+          />
+        ))
+      ) : (
+        <div className="p-8 text-center text-gray-500">
+          <p>No FAQ items found</p>
+          <p className="text-sm mt-2">Items count: {items?.length || 0}</p>
+        </div>
+      )}
     </div>
   );
 } 

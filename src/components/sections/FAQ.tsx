@@ -4,6 +4,10 @@ import { Accordion } from '@/components/ui/Accordion';
 import { AppStoreButton } from '@/components/ui/AppStoreButton';
 import { FAQ_ITEMS } from '@/lib/constants';
 
+// Debug: Log the imported FAQ items
+console.log('FAQ_ITEMS imported:', FAQ_ITEMS);
+console.log('FAQ_ITEMS length:', FAQ_ITEMS?.length);
+
 /**
  * FAQ section with accordion functionality
  */
@@ -20,9 +24,6 @@ export function FAQ() {
       
       <Container>
         <div className="relative z-10 text-center mb-16">
-          <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full border border-blue-200 mb-6">
-            <span className="text-sm font-semibold text-blue-700">❓ FAQ</span>
-          </div>
           
           <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
             Frequently Asked <span className="solid-text">Questions</span>
@@ -32,7 +33,9 @@ export function FAQ() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="max-w-4xl mx-auto mb-16 relative z-20">
+          {/* Debug: Show FAQ items count */}
+
           <Accordion items={FAQ_ITEMS} />
         </div>
 
