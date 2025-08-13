@@ -63,7 +63,7 @@ delgoo-web-frontend/
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **Fonts**: Geist Sans (Google Fonts)
-- **Icons**: SVG icons and emojis
+- **Icons**: SVG icons and Lucide React icons
 - **Deployment**: Vercel-ready
 
 ## Getting Started
@@ -234,14 +234,14 @@ The project is set up for testing with:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support
+## Support
 
 For support, email support@delgoo.com or create an issue in the repository.
 
 ---
 
-**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS**
+**Built with love using Next.js, TypeScript, and Tailwind CSS**
