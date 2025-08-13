@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from '@/components/ui/Container';
 import { AppStoreButton } from '@/components/ui/AppStoreButton';
 import { SITE_CONFIG } from '@/lib/constants';
+import { Rocket, Smartphone, Zap, Truck } from 'lucide-react';
 
 /**
  * Hero section with two-column layout
@@ -23,7 +24,8 @@ export function Hero() {
           <div className="space-y-8">
             <div className="space-y-6">
               <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full border border-blue-200">
-                <span className="text-sm font-semibold text-blue-700">🚀 Coming Soon</span>
+                <Rocket className="w-4 h-4 mr-2" />
+                <span className="text-sm font-semibold text-blue-700">Coming Soon</span>
               </div>
               
               <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight">
@@ -63,16 +65,16 @@ export function Hero() {
                 <div className="w-full h-80 bg-gray-100 rounded-modern flex items-center justify-center relative overflow-hidden">
                   {/* Modern Floating Elements */}
                   <div className="absolute top-6 right-6 w-16 h-16 bg-blue-500 rounded-2xl shadow-medium flex items-center justify-center">
-                    <span className="text-2xl">📱</span>
+                    <Smartphone className="w-8 h-8 text-white" />
                   </div>
                   <div className="absolute bottom-6 left-6 w-12 h-12 bg-yellow-500 rounded-2xl shadow-medium flex items-center justify-center">
-                    <span className="text-xl">🚚</span>
+                    <Truck className="w-6 h-6 text-white" />
                   </div>
                   
                   {/* Central Content */}
                   <div className="text-center z-10">
                     <div className="w-20 h-20 bg-blue-500 rounded-3xl mx-auto mb-4 shadow-medium flex items-center justify-center">
-                      <span className="text-3xl">⚡</span>
+                      <Zap className="w-10 h-10 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-800 mb-2">Smart Delivery</h3>
                     <p className="text-sm text-gray-600 max-w-xs">

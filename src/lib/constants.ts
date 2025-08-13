@@ -64,25 +64,21 @@ export const BENEFITS = [
     id: "time",
     title: "TIME",
     description: "No more waiting days — send and receive packages across your city in just a few hours.",
-    icon: "⏱️",
   },
   {
     id: "pollution",
     title: "POLLUTION",
     description: "Deliveries happen during existing trips, reducing traffic and cutting CO₂ emissions.",
-    icon: "🌱",
   },
   {
     id: "comfortable",
     title: "COMFORTABLE",
     description: "Send and receive packages without stepping outside — the app brings the city to your door.",
-    icon: "🏠",
   },
   {
     id: "tracking",
     title: "TRACKING",
     description: "Follow every step of your package in real time, with photos and secure QR code scans.",
-    icon: "📱",
   },
 ] as const;
 
