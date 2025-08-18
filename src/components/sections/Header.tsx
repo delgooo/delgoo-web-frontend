@@ -31,19 +31,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 font-neuemontreal bg-white">
-      {/* Modern glass morphism background with scroll effect */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-out ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-large' 
-          : 'bg-white/80 backdrop-blur-lg border-b border-gray-100/50 shadow-soft'
-      }`}>
-        {/* Subtle geometric pattern overlay */}
-        <div className="absolute inset-0 bg-pattern-dots opacity-5 transition-opacity duration-700"></div>
-        {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-white/10 opacity-0 transition-opacity duration-700" style={{ opacity: isScrolled ? 1 : 0 }}></div>
-      </div>
-      
+    <header className="sticky top-0 z-50 font-neuemontreal bg-white">      
       <Container>
         <div className="relative z-10 flex items-center justify-between h-20">
           {/* Enhanced Logo with better hover effects */}
