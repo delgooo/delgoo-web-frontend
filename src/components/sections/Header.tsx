@@ -36,39 +36,26 @@ export function Header() {
         <div className="relative z-10 flex items-center justify-between h-20">
           {/* Enhanced Logo with better hover effects */}
           <div className="flex items-center">
-            <div className="relative group cursor-pointer">
-              {/* Glowing background effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-gold-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out scale-110 group-hover:scale-125"></div>
-              {/* Floating particles effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                <div className="absolute top-2 left-2 w-2 h-2 bg-blue-500/60 rounded-full animate-pulse"></div>
-                <div className="absolute top-4 right-3 w-1.5 h-1.5 bg-gold-500/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                <div className="absolute bottom-3 left-4 w-1 h-1 bg-blue-500/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-              </div>
+            <div className="relative group cursor-pointer">             
               <img 
                 src="/logo/logo.jpg" 
                 alt="Delgoo" 
-                className="relative h-14 w-auto rounded-3xl shadow-medium ring-1 ring-gray-100/50 transition-all duration-700 ease-out group-hover:shadow-large group-hover:scale-105 group-hover:ring-2 group-hover:ring-blue-500/30 group-hover:rotate-1" 
+                className="relative h-15 w-50 rounded-3xl" 
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-gold-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </div>
           </div>
 
-          {/* Enhanced Desktop Navigation with better visual feedback */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center justify-center w-full gap-10">
             {NAVIGATION.sections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className="relative text-gray-700 hover:text-blue-600 transition-all duration-500 ease-out font-medium group px-6 py-3 rounded-2xl hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-gold-50/30 hover:shadow-soft"
+                className="relative text-gray-900 font-bold hover:text-blue-600 px-6 py-3"
               >
                 {section.label}
-                {/* Animated underline */}
-                <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-gold-500 transition-all duration-500 ease-out group-hover:w-full group-hover:left-0 rounded-full"></span>
                 {/* Background highlight */}
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-gold-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                {/* Subtle border effect */}
-                <span className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-blue-500/20 transition-all duration-500"></span>
               </button>
             ))}
           </nav>
