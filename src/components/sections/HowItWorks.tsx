@@ -19,32 +19,27 @@ export function HowItWorks() {
           </p>
         </div>
 
-         {/* Horizontal Scrollable Timeline */}
-         <div className="overflow-x-auto pb-4 yellow-scrollbar">
-           <div className="flex gap-20 min-w-max px-12">
-             {HOW_IT_WORKS.steps.map((step, index) => (
-               <div
-                 key={step.id}
-                 className="flex flex-col items-center text-center w-64 flex-shrink-0"
-               >
-                 {/* Timeline image and text */}
-                 <div className="flex flex-col items-center text-center">
-                                       <img 
-                      src={`/main/${index + 1}.png`} 
-                      alt={`Step ${index + 1}`}
-                      className="w-auto h-auto max-w-xs rounded-lg shadow-lg mb-2"
-                      style={{ objectPosition: 'center' }}
-                    />
-                   {/*<h3 className="text-lg font-bold text-gray-900 mb-1">
-                     {step.title}
-                   </h3>*/}
-                   <p className="text-black leading-relaxed max-w-xs my-4">
-                     {step.description}
-                   </p>
-                 </div>
-               </div>
-             ))}
-           </div>
+         {/* Grid Timeline 2x3 */}
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-4">
+           {HOW_IT_WORKS.steps.map((step, index) => (
+             <div
+               key={step.id}
+               className="flex flex-col items-center text-center"
+             >
+               <img 
+                 src={`/main/${index + 1}.png`} 
+                 alt={`Step ${index + 1}`}
+                 className="w-auto h-auto max-w-xs rounded-lg shadow-lg mb-2"
+                 style={{ objectPosition: 'center' }}
+               />
+               <h3 className="text-lg font-bold text-gray-900 mb-1">
+                 {step.title}
+               </h3>
+               <p className="text-gray-600 text-sm leading-relaxed max-w-xs">
+                 {step.description}
+               </p>
+             </div>
+           ))}
          </div>
 
       </Container>
