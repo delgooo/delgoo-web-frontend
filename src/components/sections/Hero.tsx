@@ -25,7 +25,7 @@ export function Hero() {
           {/* Left Column - Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+              <h1 className="text-5xl lg:text-8x1 font-extrabold leading-tight tracking-tight">
                 <span className="solid-text">{SITE_CONFIG.tagline}</span>
               </h1>
               <p className="text-3xl lg:text-2xl text-gray-800 font-bold leading-relaxed max-w-lg">
