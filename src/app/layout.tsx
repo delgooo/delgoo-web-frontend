@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,21 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Delgoo - Delivery Made Simple",
-  description: "Shorten the distance in your city. Ship smart with someone who's already on the move.",
-  keywords: ["delivery", "local delivery", "package delivery", "city delivery", "smart delivery"],
+  title: "Delgoo — Send anything. Through anyone.",
+  description: "Peer-to-peer city delivery. Someone's already going your way.",
+  keywords: ["delivery", "local delivery", "peer-to-peer", "city delivery", "Milan", "consegne"],
   authors: [{ name: "Delgoo Team" }],
   robots: "index, follow",
   openGraph: {
-    title: "Delgoo - Delivery Made Simple",
-    description: "Shorten the distance in your city. Ship smart with someone who's already on the move.",
+    title: "Delgoo — Send anything. Through anyone.",
+    description: "Peer-to-peer city delivery. Someone's already going your way.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Delgoo - Delivery Made Simple",
-    description: "Shorten the distance in your city. Ship smart with someone who's already on the move.",
+    title: "Delgoo — Send anything. Through anyone.",
+    description: "Peer-to-peer city delivery. Someone's already going your way.",
   },
 };
 
@@ -42,11 +43,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

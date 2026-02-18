@@ -1,96 +1,175 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { AppStoreButton } from '@/components/ui/AppStoreButton';
-import { SITE_CONFIG } from '@/lib/constants';
-import { Rocket, Smartphone, Zap, Truck } from 'lucide-react';
+import { HERO } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n';
 
-/**
- * Hero section with two-column layout
- */
+const wordVariants = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
 export function Hero() {
-  return (
-    <section id="home" className="relative py-20 font-neuemontreal overflow-hidden geometric-bg">
-      {/* Modern Background Elements */}
-      <div className="absolute inset-0 bg-gray-50"></div>
-      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full opacity-60"></div>
-      <div className="absolute top-20 right-0 w-96 h-96 bg-yellow-100 rounded-full opacity-60"></div>
-      
-      {/* Geometric Pattern Overlay */}
-      <div className="absolute inset-0 bg-pattern-dots opacity-20"></div>
-      
-      <Container>
-        <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Content */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full border border-blue-200">
-                <Rocket className="w-4 h-4 mr-2" />
-                <span className="text-sm font-semibold text-blue-700">Coming Soon</span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight tracking-tight">
-                <span className="solid-text">{SITE_CONFIG.tagline}</span>
-              </h1>
-              
-              <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl">
-                {SITE_CONFIG.description}
-              </p>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <AppStoreButton platform="google-play" />
-                <AppStoreButton platform="app-store" />
-              </div>
-              
-              {/* Social Proof */}
-              <div className="flex items-center gap-6 text-sm text-gray-500">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    <div className="w-8 h-8 bg-blue-500 rounded-full border-2 border-white"></div>
-                    <div className="w-8 h-8 bg-yellow-500 rounded-full border-2 border-white"></div>
-                    <div className="w-8 h-8 bg-blue-600 rounded-full border-2 border-white"></div>
-                  </div>
-                  <span>Join 10K+ users</span>
-                </div>
-              </div>
-            </div>
-          </div> 
+  const { t } = useLanguage();
+  const tagline = t(HERO.tagline);
+  const lines = tagline.split('\n');
+  const sectionRef = useRef<HTMLElement>(null);
 
-          {/* Right Column - Visual */}
-          <div className="relative">
-            {/* Main Card */}
-            <div className="relative z-10">
-              <div className="bg-white rounded-modern-lg p-8 shadow-large ring-1 ring-gray-100 border border-gray-200">
-                <div className="w-full h-80 bg-gray-100 rounded-modern flex items-center justify-center relative overflow-hidden">
-                  {/* Modern Floating Elements */}
-                  <div className="absolute top-6 right-6 w-16 h-16 bg-blue-500 rounded-2xl shadow-medium flex items-center justify-center">
-                    <Smartphone className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="absolute bottom-6 left-6 w-12 h-12 bg-yellow-500 rounded-2xl shadow-medium flex items-center justify-center">
-                    <Truck className="w-6 h-6 text-white" />
-                  </div>
-                  
-                  {/* Central Content */}
-                  <div className="text-center z-10">
-                    <div className="w-20 h-20 bg-blue-500 rounded-3xl mx-auto mb-4 shadow-medium flex items-center justify-center">
-                      <Zap className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">Smart Delivery</h3>
-                    <p className="text-sm text-gray-600 max-w-xs">
-                      Connect with people already on the move
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Modern background decoration */}
-            <div className="absolute inset-0 bg-blue-100 rounded-modern-lg -z-10 transform rotate-2 scale-105"></div>
-            <div className="absolute inset-0 bg-yellow-100 rounded-modern-lg -z-20 transform -rotate-1 scale-110"></div>
-          </div>
-        </div>
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  return (
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center bg-slate-950 font-neuemontreal overflow-hidden"
+    >
+      {/* Background Video with parallax */}
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover scale-110"
+          poster=""
+        >
+          <source src="/video/hero-bg.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-slate-950/70" />
+
+      {/* Animated gradient mesh */}
+      <div className="absolute inset-0 hero-gradient-mesh opacity-60" />
+
+      <Container>
+        <motion.div
+          className="relative z-10 py-32 md:py-40"
+          style={{ y: textY, opacity: contentOpacity }}
+        >
+          {/* Headline with word-by-word reveal */}
+          <motion.h1
+            className="text-6xl sm:text-7xl lg:text-[9rem] font-light leading-[0.9] tracking-tight text-gray-400"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: { staggerChildren: 0.08, delayChildren: 0.3 },
+              },
+            }}
+          >
+            {lines.map((line, i) => {
+              const words = line.split(' ');
+              return (
+                <motion.span key={i} className="block" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}>
+                  {words.map((word, j) => {
+                    const isAccent = i === lines.length - 1 && j === words.length - 1;
+                    const isHeavy = (i + j) % 2 === 1;
+
+                    return (
+                      <motion.span
+                        key={j}
+                        variants={wordVariants}
+                        className={`inline-block mr-[0.2em] ${
+                          isAccent
+                            ? 'font-black text-delgoo-gold'
+                            : isHeavy
+                              ? 'font-black text-white'
+                              : ''
+                        }`}
+                      >
+                        {word}
+                      </motion.span>
+                    );
+                  })}
+                </motion.span>
+              );
+            })}
+          </motion.h1>
+
+          {/* Description with fade up */}
+          <motion.p
+            className="mt-8 text-xl md:text-2xl text-gray-400 max-w-xl leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {t(HERO.description)}
+          </motion.p>
+
+          {/* CTA buttons with staggered entrance */}
+          <motion.div
+            className="mt-10 flex flex-col sm:flex-row gap-4"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.15, delayChildren: 1.3 } },
+            }}
+          >
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
+              }}
+              className="animate-pulse-glow rounded-2xl"
+            >
+              <AppStoreButton platform="google-play" />
+            </motion.div>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
+              }}
+            >
+              <AppStoreButton platform="app-store" />
+            </motion.div>
+          </motion.div>
+
+          {/* Launch tag */}
+          <motion.p
+            className="mt-8 text-sm tracking-widest uppercase text-gray-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.8 }}
+          >
+            {t(HERO.launch)}
+          </motion.p>
+        </motion.div>
       </Container>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2.2, duration: 0.6 }}
+      >
+        <motion.div
+          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <motion.div className="w-1 h-2.5 bg-white/50 rounded-full mt-2" />
+        </motion.div>
+      </motion.div>
     </section>
   );
-} 
+}

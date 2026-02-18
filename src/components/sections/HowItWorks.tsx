@@ -1,90 +1,160 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { HOW_IT_WORKS } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n';
 
-/**
- * Modernized How It Works section with enhanced visual design and interactions
- */
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const imageVariants = (isEven: boolean) => ({
+  hidden: { opacity: 0, x: isEven ? -60 : 60, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
+  },
+});
+
+const textVariants = (isEven: boolean) => ({
+  hidden: { opacity: 0, x: isEven ? 60 : -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] as const },
+  },
+});
+
 export function HowItWorks() {
+  const { t } = useLanguage();
+
   return (
-    <section id="how-it-works" className="relative py-24 font-neuemontreal overflow-hidden">
-      {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 bg-white"></div>
-      
-      {/* Subtle Accent Elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-blue-50/30 rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-yellow-50/30 rounded-full"></div>
-      
-      {/* Very Subtle Pattern Overlay */}
-      <div className="absolute inset-0 bg-pattern-dots opacity-3"></div>
-      
+    <section
+      id="how-it-works"
+      className="py-24 md:py-32 bg-white font-neuemontreal"
+    >
       <Container>
-        <div className="relative z-10 text-center mb-20">
-          {/* Enhanced Header */}
-          
-          <h2 className="text-6xl font-extrabold text-gray-900 mb-8 leading-tight">
-            How It <span className="solid-text">Works</span>
+        <motion.div
+          className="text-center mb-16 md:mb-24"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <h2 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+            {t(HOW_IT_WORKS.title)}
           </h2>
-          
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            {HOW_IT_WORKS.description}
+          <p className="mt-6 text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
+            {t(HOW_IT_WORKS.description)}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Enhanced Timeline */}
-        <div className="relative">
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 lg:gap-6">
-            {HOW_IT_WORKS.steps.map((step, index) => (
-              <div
-                key={step.id}
-                className="relative group"
-              >
-                {/* Enhanced Step Number */}
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-large z-10 group-hover:scale-110 hover:scale-105 transition-all duration-500 ease-out hover:-translate-y-1">
-                  {index + 1}
-                  <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-ping"></div>
-                </div>
-                
-                {/* Enhanced Card Design */}
-                <div className="text-center pt-12">
-                  <div className="relative mb-8 group-hover:scale-105 transition-all duration-500">
-                    {/* Image Container with Enhanced Styling */}
-                    <div className="relative overflow-hidden rounded-modern-lg shadow-large ring-1 ring-gray-100/50 bg-white p-2">
-                      <img 
-                        src={`/main/${index + 1}.png`} 
-                        alt={`Step ${index + 1}: ${step.title}`}
-                        className="w-full h-auto max-w-xs mx-auto rounded-modern object-cover"
-                        style={{ objectPosition: 'center' }}
-                      />
-                      
-                      {/* Enhanced Hover Effects */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      
-                      {/* Subtle Border Glow */}
-                      <div className="absolute inset-0 rounded-modern-lg ring-2 ring-blue-200/50 group-hover:ring-blue-300/70 transition-all duration-300"></div>
-                    </div>
-                    
-                  </div>
-                  
-                  {/* Enhanced Content */}
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                      {step.title}
-                    </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed max-w-xs mx-auto text-sm">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+        {/* Mobile: Horizontal scroll */}
+        <motion.div
+          className="md:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-6 px-2 -mx-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {HOW_IT_WORKS.steps.map((step, index) => (
+            <motion.div
+              key={step.id}
+              className="snap-center flex-shrink-0 w-[85vw] max-w-sm"
+              variants={itemVariants}
+            >
+              <div className="relative">
+                <span className="text-[8rem] font-black leading-none text-delgoo-gold/10 select-none absolute -top-8 -left-2">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <img
+                  src={`/main/${index + 1}.png`}
+                  alt={`Step ${index + 1}`}
+                  className="relative w-full rounded-2xl"
+                />
               </div>
-            ))}
-          </div>
+              <div className="mt-6">
+                <h3 className="text-xl font-bold text-gray-900">
+                  {t(step.title)}
+                </h3>
+                <p className="mt-2 text-gray-500 leading-relaxed">
+                  {t(step.description)}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
+        {/* Desktop: Alternating layout with timeline */}
+        <div className="hidden md:flex flex-col gap-24 lg:gap-32 relative timeline-line">
+          {HOW_IT_WORKS.steps.map((step, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                key={step.id}
+                className={`flex items-center gap-12 lg:gap-20 ${
+                  isEven ? '' : 'flex-row-reverse'
+                }`}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                {/* Image */}
+                <motion.div
+                  className="flex-1 relative"
+                  variants={imageVariants(isEven)}
+                >
+                  <span className="text-[10rem] lg:text-[12rem] font-black leading-none text-shimmer select-none absolute -top-16 -left-4 opacity-20">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <motion.img
+                    src={`/main/${index + 1}.png`}
+                    alt={`Step ${index + 1}`}
+                    className="relative w-full max-w-md mx-auto rounded-2xl"
+                    whileHover={{ scale: 1.03, rotate: isEven ? 1 : -1 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </motion.div>
+
+                {/* Text */}
+                <motion.div
+                  className="flex-1"
+                  variants={textVariants(isEven)}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 rounded-full bg-delgoo-blue flex items-center justify-center text-white font-bold text-sm">
+                      {index + 1}
+                    </span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-delgoo-blue/20 to-transparent" />
+                  </div>
+                  <h3 className="text-3xl lg:text-4xl font-bold text-gray-900">
+                    {t(step.title)}
+                  </h3>
+                  <p className="mt-4 text-lg text-gray-500 leading-relaxed max-w-md">
+                    {t(step.description)}
+                  </p>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
       </Container>
     </section>
   );
-} 
+}

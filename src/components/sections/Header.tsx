@@ -1,144 +1,181 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Container } from '@/components/ui/Container';
-import { AppStoreButton } from '@/components/ui/AppStoreButton';
-import { SITE_CONFIG, NAVIGATION } from '@/lib/constants';
+import { NAVIGATION } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n';
 
-/**
- * Modern Header component with glass morphism, enhanced animations, and improved UX
- */
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { lang, setLang, t } = useLanguage();
 
-  // Handle scroll effect for header background
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 font-neuemontreal">
-      {/* Modern glass morphism background with scroll effect */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-out ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-large' 
-          : 'bg-white/80 backdrop-blur-lg border-b border-gray-100/50 shadow-soft'
-      }`}>
-        {/* Subtle geometric pattern overlay */}
-        <div className="absolute inset-0 bg-pattern-dots opacity-5 transition-opacity duration-700"></div>
-        {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-white/10 opacity-0 transition-opacity duration-700" style={{ opacity: isScrolled ? 1 : 0 }}></div>
-      </div>
-      
-      <Container>
-        <div className="relative z-10 flex items-center justify-between h-24">
-          {/* Enhanced Logo with better hover effects */}
-          <div className="flex items-center">
-            <div className="relative group cursor-pointer">
-              {/* Glowing background effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-gold-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out scale-110 group-hover:scale-125"></div>
-              {/* Floating particles effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                <div className="absolute top-2 left-2 w-2 h-2 bg-blue-500/60 rounded-full animate-pulse"></div>
-                <div className="absolute top-4 right-3 w-1.5 h-1.5 bg-gold-500/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                <div className="absolute bottom-3 left-4 w-1 h-1 bg-blue-500/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+    <motion.header
+      className="fixed top-0 left-0 right-0 z-50 font-neuemontreal"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div
+        className={`transition-all duration-500 ${
+          isScrolled
+            ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-sm'
+            : 'bg-transparent'
+        }`}
+      >
+        <Container>
+          <div className="flex items-center justify-between h-20">
+            {/* Logo: icon + wordmark */}
+            <motion.button
+              onClick={() => scrollToSection('home')}
+              className="flex items-center gap-2 flex-shrink-0"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo/icon.png" alt="" className="h-9 w-auto" />
+              <span className={`text-xl font-extrabold tracking-tight transition-colors duration-300 ${
+                isScrolled ? 'text-delgoo-blue' : 'text-white'
+              }`}>
+                Delgoo
+              </span>
+            </motion.button>
+
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-8">
+              {NAVIGATION.sections.map((section, i) => (
+                <motion.button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`text-sm font-medium transition-colors duration-300 relative group ${
+                    isScrolled ? 'text-gray-700 hover:text-delgoo-blue' : 'text-white/80 hover:text-white'
+                  }`}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
+                  whileHover={{ y: -1 }}
+                >
+                  {t(section.label)}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-current transition-all duration-300 group-hover:w-full" />
+                </motion.button>
+              ))}
+
+              {/* Language Toggle */}
+              <div className="flex items-center bg-gray-100/80 rounded-full p-0.5 text-sm">
+                <button
+                  onClick={() => setLang('en')}
+                  className={`px-3 py-1 rounded-full font-medium transition-all duration-200 ${
+                    lang === 'en'
+                      ? 'bg-delgoo-blue text-white shadow-sm'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLang('it')}
+                  className={`px-3 py-1 rounded-full font-medium transition-all duration-200 ${
+                    lang === 'it'
+                      ? 'bg-delgoo-blue text-white shadow-sm'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  IT
+                </button>
               </div>
-              <img 
-                src="/logo/logo.jpg" 
-                alt="Delgoo" 
-                className="relative h-14 w-auto rounded-3xl shadow-medium ring-1 ring-gray-100/50 transition-all duration-700 ease-out group-hover:shadow-large group-hover:scale-105 group-hover:ring-2 group-hover:ring-blue-500/30 group-hover:rotate-1" 
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-gold-500/10 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            </nav>
+
+            {/* Mobile: Lang toggle + hamburger */}
+            <div className="md:hidden flex items-center gap-3">
+              <div className="flex items-center bg-gray-100/80 rounded-full p-0.5 text-xs">
+                <button
+                  onClick={() => setLang('en')}
+                  className={`px-2 py-0.5 rounded-full font-medium transition-all duration-200 ${
+                    lang === 'en' ? 'bg-delgoo-blue text-white' : 'text-gray-500'
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLang('it')}
+                  className={`px-2 py-0.5 rounded-full font-medium transition-all duration-200 ${
+                    lang === 'it' ? 'bg-delgoo-blue text-white' : 'text-gray-500'
+                  }`}
+                >
+                  IT
+                </button>
+              </div>
+
+              <button
+                className={`p-2 rounded-lg transition-colors ${
+                  isScrolled ? 'text-gray-700' : 'text-white'
+                }`}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                <div className="relative w-5 h-5">
+                  <span
+                    className={`absolute left-0 w-5 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'top-2 rotate-45' : 'top-0.5'
+                    }`}
+                  />
+                  <span
+                    className={`absolute left-0 top-2 w-5 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'opacity-0' : ''
+                    }`}
+                  />
+                  <span
+                    className={`absolute left-0 w-5 h-0.5 bg-current transition-all duration-300 ${
+                      isMobileMenuOpen ? 'top-2 -rotate-45' : 'top-3.5'
+                    }`}
+                  />
+                </div>
+              </button>
             </div>
           </div>
+        </Container>
+      </div>
 
-          {/* Enhanced Desktop Navigation with better visual feedback */}
-          <nav className="hidden md:flex items-center justify-center w-full gap-10">
-            {NAVIGATION.sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className="relative text-gray-700 hover:text-blue-600 transition-all duration-500 ease-out font-medium group px-6 py-3 rounded-2xl hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-gold-50/30 hover:shadow-soft"
-              >
-                {section.label}
-                {/* Animated underline */}
-                <span className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-gold-500 transition-all duration-500 ease-out group-hover:w-full group-hover:left-0 rounded-full"></span>
-                {/* Background highlight */}
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-gold-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                {/* Subtle border effect */}
-                <span className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-blue-500/20 transition-all duration-500"></span>
-              </button>
-            ))}
-          </nav>
-
-          {/* Enhanced mobile menu button with better animations */}
-          <button
-            className="md:hidden p-3 rounded-2xl text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-gold-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition-all duration-500 ease-out relative group hover:shadow-soft"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle mobile menu"
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="md:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative w-6 h-6">
-              <span className={`absolute inset-0 w-6 h-0.5 bg-current transform transition-all duration-500 ease-out ${
-                isMobileMenuOpen ? 'rotate-45 translate-y-0' : '-translate-y-2'
-              }`}></span>
-              <span className={`absolute inset-0 w-6 h-0.5 bg-current transform transition-all duration-500 ease-out ${
-                isMobileMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
-              }`}></span>
-              <span className={`absolute inset-0 w-6 h-0.5 bg-current transform transition-all duration-500 ease-out ${
-                isMobileMenuOpen ? '-rotate-45 translate-y-0' : 'translate-y-2'
-              }`}></span>
+            <div className="bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg px-6 py-4 space-y-1">
+              {NAVIGATION.sections.map((section, i) => (
+                <motion.button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className="block w-full text-left px-4 py-3 text-gray-700 hover:text-delgoo-blue hover:bg-gray-50 rounded-lg transition-colors font-medium"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                >
+                  {t(section.label)}
+                </motion.button>
+              ))}
             </div>
-            {/* Enhanced hover effect background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-gold-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            {/* Subtle border effect */}
-            <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-blue-500/20 transition-all duration-500"></div>
-          </button>
-        </div>
-
-        {/* Enhanced Mobile Navigation with glass morphism */}
-        <div className={`md:hidden transition-all duration-500 ease-out ${
-          isMobileMenuOpen 
-            ? 'opacity-100 translate-y-0 max-h-96' 
-            : 'opacity-0 -translate-y-4 max-h-0 pointer-events-none'
-        }`}>
-          <div className="px-6 pt-6 pb-8 space-y-3 bg-white/90 backdrop-blur-xl border-t border-gray-200/50 shadow-large rounded-b-3xl mt-2">
-            {NAVIGATION.sections.map((section, index) => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className="block w-full text-left px-6 py-4 text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-gold-50/30 rounded-2xl transition-all duration-300 font-medium group relative overflow-hidden"
-                style={{ transitionDelay: `${index * 50}ms` }}
-              >
-                <span className="relative z-10">{section.label}</span>
-                <div className="absolute inset-0 bg-blue-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute left-0 top-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-gold-500 transform -translate-y-1/2 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 rounded-full"></div>
-              </button>
-            ))}
-            
-                         {/* Download app section in mobile menu */}
-             <div className="pt-4 border-t border-gray-200/50">
-               <div className="px-6 py-4">
-                 <p className="text-sm text-gray-600 mb-3 font-medium">Download the app</p>
-                 <AppStoreButton platform="app-store" />
-               </div>
-             </div>
-          </div>
-        </div>
-      </Container>
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
-} 
+}

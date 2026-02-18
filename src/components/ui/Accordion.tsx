@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { Bilingual } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n';
 
 interface AccordionItemProps {
   question: string;
@@ -9,30 +11,31 @@ interface AccordionItemProps {
   onToggle: () => void;
 }
 
-/**
- * Individual accordion item component
- */
 function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
   return (
-    <div className="border-b border-gray-200 last:border-b-0 group">
+    <div className="border-b border-gray-200 last:border-b-0">
       <button
-        className="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-blue-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-2xl mx-2 my-1"
+        className="w-full px-0 py-6 text-left flex justify-between items-center focus:outline-none group"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
-        <span className="font-semibold text-gray-900 pr-4 text-lg">{question}</span>
-        <span className={`transform transition-all duration-300 ${isOpen ? 'rotate-180 scale-110' : 'scale-100'}`}>
-          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-medium">
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
+        <span className="font-semibold text-gray-900 pr-8 text-lg group-hover:text-delgoo-blue transition-colors duration-200">
+          {question}
+        </span>
+        <span
+          className={`text-2xl text-gray-400 flex-shrink-0 transition-transform duration-300 ${
+            isOpen ? 'rotate-45' : ''
+          }`}
+        >
+          +
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-        <div className="px-8 pb-6 text-gray-600 leading-relaxed text-base">
-          {answer}
-        </div>
+      <div
+        className={`overflow-hidden transition-all duration-400 ease-out ${
+          isOpen ? 'max-h-96 pb-6' : 'max-h-0'
+        }`}
+      >
+        <p className="text-gray-500 leading-relaxed">{answer}</p>
       </div>
     </div>
   );
@@ -41,50 +44,36 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
 interface AccordionProps {
   items: ReadonlyArray<{
     readonly id: number;
-    readonly question: string;
-    readonly answer: string;
+    readonly question: Bilingual;
+    readonly answer: Bilingual;
   }>;
 }
 
-/**
- * Accordion component for FAQ section
- */
 export function Accordion({ items }: AccordionProps) {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set([1])); // Open first item by default
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([1]));
+  const { t } = useLanguage();
 
   const toggleItem = (id: number) => {
-    const newOpenItems = new Set(openItems);
-    if (newOpenItems.has(id)) {
-      newOpenItems.delete(id);
+    const next = new Set(openItems);
+    if (next.has(id)) {
+      next.delete(id);
     } else {
-      newOpenItems.add(id);
+      next.add(id);
     }
-    setOpenItems(newOpenItems);
+    setOpenItems(next);
   };
 
-  // Debug: Log the items to see what we're receiving
-  console.log('FAQ Items received:', items);
-  console.log('FAQ Items length:', items?.length);
-  console.log('FAQ Items structure:', JSON.stringify(items, null, 2));
-
   return (
-    <div className="bg-white rounded-modern-lg shadow-large ring-1 ring-gray-100 border border-gray-200 overflow-hidden">
-      {items && items.length > 0 ? (
-        items.map((item) => (
-          <AccordionItem
-            key={item.id}
-            question={item.question}
-            answer={item.answer}
-            isOpen={openItems.has(item.id)}
-            onToggle={() => toggleItem(item.id)}
-          />
-        ))
-      ) : (
-        <div className="p-8 text-center text-gray-500">
-          <p>No FAQ items found</p>
-          <p className="text-sm mt-2">Items count: {items?.length || 0}</p>
-        </div>
-      )}
+    <div>
+      {items.map((item) => (
+        <AccordionItem
+          key={item.id}
+          question={t(item.question)}
+          answer={t(item.answer)}
+          isOpen={openItems.has(item.id)}
+          onToggle={() => toggleItem(item.id)}
+        />
+      ))}
     </div>
   );
-} 
+}
