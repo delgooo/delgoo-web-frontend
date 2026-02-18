@@ -1,6 +1,8 @@
 export type Lang = 'en' | 'it';
 export type Bilingual = { en: string; it: string };
 
+export const BASE_PATH = process.env.NODE_ENV === 'production' ? '/delgoo-web-frontend' : '';
+
 export const SITE_CONFIG = {
   name: "Delgoo",
   colors: {

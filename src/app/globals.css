@@ -20,17 +20,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Custom Font */
-@font-face {
-  font-family: 'NeueMontreal';
-  src: url('/fonts/neue-montreal.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* Custom Font — loaded via next/font/local in layout.tsx for basePath compatibility */
 
 .font-neuemontreal {
-  font-family: 'NeueMontreal', sans-serif;
+  font-family: var(--font-neuemontreal), sans-serif;
 }
 
 body {

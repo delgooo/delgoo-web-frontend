@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { AppStoreButton } from '@/components/ui/AppStoreButton';
-import { SITE_CONFIG, FOOTER } from '@/lib/constants';
+import { SITE_CONFIG, FOOTER, BASE_PATH } from '@/lib/constants';
 import { useLanguage } from '@/lib/i18n';
 
 export function Footer() {
@@ -25,7 +25,7 @@ export function Footer() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo/icon.png" alt="" className="h-14 md:h-18 w-auto" />
+            <img src={`${BASE_PATH}/logo/icon.png`} alt="" className="h-14 md:h-18 w-auto" />
             <p className="text-5xl md:text-7xl font-black tracking-tight text-white/90">
               {SITE_CONFIG.name}
             </p>

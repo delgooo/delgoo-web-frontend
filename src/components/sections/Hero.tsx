@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { AppStoreButton } from '@/components/ui/AppStoreButton';
-import { HERO } from '@/lib/constants';
+import { HERO, BASE_PATH } from '@/lib/constants';
 import { useLanguage } from '@/lib/i18n';
 
 const wordVariants = {
@@ -48,7 +48,7 @@ export function Hero() {
           className="absolute inset-0 w-full h-full object-cover scale-110"
           poster=""
         >
-          <source src="/video/hero-bg.mp4" type="video/mp4" />
+          <source src={`${BASE_PATH}/video/hero-bg.mp4`} type="video/mp4" />
         </video>
       </motion.div>
 

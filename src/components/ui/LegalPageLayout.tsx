@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { LanguageProvider, useLanguage } from '@/lib/i18n';
-import { SITE_CONFIG } from '@/lib/constants';
+import { SITE_CONFIG, BASE_PATH } from '@/lib/constants';
 
 function LegalNav() {
   const { lang, setLang } = useLanguage();
@@ -19,7 +19,7 @@ function LegalNav() {
             className="flex items-center gap-2 text-delgoo-blue hover:text-delgoo-gold transition-colors duration-200 font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
-            <img src="/logo/icon.png" alt="" className="h-8 w-auto" />
+            <img src={`${BASE_PATH}/logo/icon.png`} alt="" className="h-8 w-auto" />
             <span className="font-neuemontreal font-bold text-lg">{SITE_CONFIG.name}</span>
           </Link>
           <button

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Container } from '@/components/ui/Container';
-import { NAVIGATION } from '@/lib/constants';
+import { NAVIGATION, BASE_PATH } from '@/lib/constants';
 import { useLanguage } from '@/lib/i18n';
 
 export function Header() {
@@ -46,7 +46,7 @@ export function Header() {
               whileTap={{ scale: 0.97 }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo/icon.png" alt="" className="h-9 w-auto" />
+              <img src={`${BASE_PATH}/logo/icon.png`} alt="" className="h-9 w-auto" />
               <span className={`text-xl font-extrabold tracking-tight transition-colors duration-300 ${
                 isScrolled ? 'text-delgoo-blue' : 'text-white'
               }`}>
