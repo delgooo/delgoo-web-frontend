@@ -35,8 +35,8 @@ function PrivacyEN() {
       <ul>
         <li><strong>Company:</strong> Delgoo S.r.l.</li>
         <li><strong>Registered address:</strong> Milan, Italy</li>
-        <li><strong>Email:</strong> privacy@delgoo.com</li>
-        <li><strong>Data Protection Officer (DPO):</strong> dpo@delgoo.com</li>
+        <li><strong>Email:</strong> support@delgoo.com</li>
+        <li><strong>Data Protection Officer (DPO):</strong> support@delgoo.com</li>
       </ul>
 
       <h2>2. Personal Data We Collect</h2>
@@ -197,7 +197,7 @@ function PrivacyEN() {
         <li><strong>Right to lodge a complaint:</strong> file a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali) at <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a>.</li>
       </ul>
       <p>
-        To exercise any of these rights, contact us at <a href="mailto:privacy@delgoo.com">privacy@delgoo.com</a>.
+        To exercise any of these rights, contact us at <a href="mailto:support@delgoo.com">support@delgoo.com</a>.
         We will respond within 30 days of receiving your request.
       </p>
 
@@ -272,8 +272,8 @@ function PrivacyEN() {
       </p>
       <ul>
         <li><strong>General inquiries:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
-        <li><strong>Privacy-specific requests:</strong> <a href="mailto:privacy@delgoo.com">privacy@delgoo.com</a></li>
-        <li><strong>Data Protection Officer:</strong> <a href="mailto:dpo@delgoo.com">dpo@delgoo.com</a></li>
+        <li><strong>Privacy-specific requests:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
+        <li><strong>Data Protection Officer:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
       </ul>
     </>
   );
@@ -303,8 +303,8 @@ function PrivacyIT() {
       <ul>
         <li><strong>Societ&agrave;:</strong> Delgoo S.r.l.</li>
         <li><strong>Sede legale:</strong> Milano, Italia</li>
-        <li><strong>Email:</strong> privacy@delgoo.com</li>
-        <li><strong>Responsabile della Protezione dei Dati (DPO):</strong> dpo@delgoo.com</li>
+        <li><strong>Email:</strong> support@delgoo.com</li>
+        <li><strong>Responsabile della Protezione dei Dati (DPO):</strong> support@delgoo.com</li>
       </ul>
 
       <h2>2. Dati Personali che Raccogliamo</h2>
@@ -466,7 +466,7 @@ function PrivacyIT() {
         <li><strong>Diritto di reclamo:</strong> presentare un reclamo al Garante per la protezione dei dati personali su <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a>.</li>
       </ul>
       <p>
-        Per esercitare uno qualsiasi di questi diritti, contattateci all&apos;indirizzo <a href="mailto:privacy@delgoo.com">privacy@delgoo.com</a>.
+        Per esercitare uno qualsiasi di questi diritti, contattateci all&apos;indirizzo <a href="mailto:support@delgoo.com">support@delgoo.com</a>.
         Risponderemo entro 30 giorni dal ricevimento della vostra richiesta.
       </p>
 
@@ -543,8 +543,8 @@ function PrivacyIT() {
       </p>
       <ul>
         <li><strong>Richieste generali:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
-        <li><strong>Richieste relative alla privacy:</strong> <a href="mailto:privacy@delgoo.com">privacy@delgoo.com</a></li>
-        <li><strong>Responsabile della Protezione dei Dati:</strong> <a href="mailto:dpo@delgoo.com">dpo@delgoo.com</a></li>
+        <li><strong>Richieste relative alla privacy:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
+        <li><strong>Responsabile della Protezione dei Dati:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
       </ul>
     </>
   );

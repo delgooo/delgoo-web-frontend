@@ -462,7 +462,7 @@ function TermsEN() {
       <p>For questions or concerns about these Terms:</p>
       <ul>
         <li><strong>Email:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
-        <li><strong>Legal inquiries:</strong> <a href="mailto:legal@delgoo.com">legal@delgoo.com</a></li>
+        <li><strong>Legal inquiries:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
       </ul>
     </>
   );
@@ -931,7 +931,7 @@ function TermsIT() {
       <p>Per domande o dubbi sui presenti Termini:</p>
       <ul>
         <li><strong>Email:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
-        <li><strong>Richieste legali:</strong> <a href="mailto:legal@delgoo.com">legal@delgoo.com</a></li>
+        <li><strong>Richieste legali:</strong> <a href="mailto:support@delgoo.com">support@delgoo.com</a></li>
       </ul>
     </>
   );
