@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Container } from '@/components/ui/Container';
-import { HOW_IT_WORKS } from '@/lib/constants';
+import { HOW_IT_WORKS, BASE_PATH } from '@/lib/constants';
 import { useLanguage } from '@/lib/i18n';
 
 const containerVariants = {
@@ -84,7 +84,7 @@ export function HowItWorks() {
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <img
-                  src={`/main/${index + 1}.png`}
+                  src={`${BASE_PATH}/main/${index + 1}.png`}
                   alt={`Step ${index + 1}`}
                   className="relative w-full rounded-2xl"
                 />
@@ -124,7 +124,7 @@ export function HowItWorks() {
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <motion.img
-                    src={`/main/${index + 1}.png`}
+                    src={`${BASE_PATH}/main/${index + 1}.png`}
                     alt={`Step ${index + 1}`}
                     className="relative w-full max-w-md mx-auto rounded-2xl"
                     whileHover={{ scale: 1.03, rotate: isEven ? 1 : -1 }}
