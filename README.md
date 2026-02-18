@@ -2,7 +2,7 @@
 
 A modern, responsive website for Delgoo, a local delivery platform that connects senders with people already on the move for fast, secure, and eco-friendly deliveries.
 
-## 🚀 Features
+## Features
 
 ### Design & Branding
 - **Brand Colors**: 
@@ -57,16 +57,16 @@ delgoo-web-frontend/
 └── package.json               # Dependencies and scripts
 ```
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **Fonts**: Geist Sans (Google Fonts)
-- **Icons**: SVG icons and emojis
+- **Icons**: SVG icons and Lucide React icons
 - **Deployment**: Vercel-ready
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
@@ -137,14 +137,14 @@ delgoo-web-frontend/
 <Accordion items={FAQ_ITEMS} />
 ```
 
-## 📱 Responsive Design
+## Responsive Design
 
 The website is fully responsive with breakpoints:
 - **Mobile**: < 768px
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
 
-## ♿ Accessibility
+## Accessibility
 
 - **Keyboard Navigation**: All interactive elements are keyboard accessible
 - **Screen Reader Support**: Proper ARIA labels and semantic HTML
@@ -152,7 +152,7 @@ The website is fully responsive with breakpoints:
 - **Color Contrast**: WCAG AA compliant color combinations
 - **Alt Text**: All images have descriptive alt text
 
-## 🔧 Customization
+## Customization
 
 ### Adding New Sections
 1. Create a new component in `src/components/sections/`
@@ -172,7 +172,7 @@ All content is centralized in `src/lib/constants.ts`:
 - Component-specific styles using Tailwind classes
 - CSS variables for brand colors
 
-## 📊 Performance
+## Performance
 
 - **Lighthouse Score**: 95+ across all metrics
 - **Core Web Vitals**: Optimized for LCP, FID, and CLS
@@ -180,7 +180,7 @@ All content is centralized in `src/lib/constants.ts`:
 - **Image Optimization**: Next.js Image component
 - **Font Loading**: Optimized with `next/font`
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 1. Connect your GitHub repository to Vercel
@@ -194,7 +194,7 @@ The project can be deployed to any platform that supports Next.js:
 - DigitalOcean App Platform
 - AWS Amplify
 
-## 📝 Content Management
+## Content Management
 
 The website content is managed through the constants file:
 
@@ -211,7 +211,7 @@ export const SITE_CONFIG = {
 };
 ```
 
-## 🔍 SEO
+## SEO
 
 - **Meta Tags**: Complete Open Graph and Twitter Card support
 - **Structured Data**: JSON-LD schema markup
@@ -219,14 +219,14 @@ export const SITE_CONFIG = {
 - **Robots.txt**: Search engine optimization
 - **Performance**: Fast loading times for better rankings
 
-## 🧪 Testing
+## Testing
 
 The project is set up for testing with:
 - **TypeScript**: Compile-time error checking
 - **ESLint**: Code quality and consistency
 - **Next.js Built-in Testing**: Ready for Jest and React Testing Library
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -234,14 +234,14 @@ The project is set up for testing with:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support
+## Support
 
 For support, email support@delgoo.com or create an issue in the repository.
 
 ---
 
-**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS**
+**Built with love using Next.js, TypeScript, and Tailwind CSS**

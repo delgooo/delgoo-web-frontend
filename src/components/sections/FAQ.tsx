@@ -1,48 +1,49 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'motion/react';
 import { Container } from '@/components/ui/Container';
 import { Accordion } from '@/components/ui/Accordion';
-import { AppStoreButton } from '@/components/ui/AppStoreButton';
 import { FAQ_ITEMS } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n';
 
-/**
- * FAQ section with accordion functionality
- */
 export function FAQ() {
+  const { t } = useLanguage();
+
   return (
-    <section id="faq" className="py-12 bg-white">
+    <section
+      id="faq"
+      className="py-24 md:py-32 bg-gray-50 font-neuemontreal"
+    >
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Frequently Asked Questions
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+            FAQ
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Find answers to the most common questions about Delgoo
+          <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
+            {t({
+              en: "Answers to the most common questions",
+              it: "Risposte alle domande più frequenti",
+            })}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-4xl mx-auto">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
           <Accordion items={FAQ_ITEMS} />
-        </div>
-
-        {/* Contact CTA */}
-        <div className="text-center mt-8">
-          <div className="bg-gradient-to-r from-[#1F489F] to-[#2d5bb8] rounded-xl p-6 text-white">
-            <h3 className="text-xl font-bold mb-3">
-              Still Have Questions?
-            </h3>
-            <p className="text-base mb-4 opacity-90">
-              Our support team is here to help you with any questions or concerns.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <AppStoreButton platform="google-play" />
-              <AppStoreButton platform="app-store" />
-              <button className="border-2 border-white text-white hover:bg-white hover:text-[#1F489F] font-bold py-3 px-6 rounded-lg transition-colors duration-200">
-                View Help Center
-              </button>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
-} 
+}

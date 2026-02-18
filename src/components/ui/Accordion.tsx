@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import type { Bilingual } from '@/lib/constants';
+import { useLanguage } from '@/lib/i18n';
 
 interface AccordionItemProps {
   question: string;
@@ -9,28 +11,31 @@ interface AccordionItemProps {
   onToggle: () => void;
 }
 
-/**
- * Individual accordion item component
- */
 function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
   return (
     <div className="border-b border-gray-200 last:border-b-0">
       <button
-        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1F489F] focus:ring-inset"
+        className="w-full px-0 py-6 text-left flex justify-between items-center focus:outline-none group"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
-        <span className="font-medium text-gray-900 pr-4">{question}</span>
-        <span className={`transform transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
-          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+        <span className="font-semibold text-gray-900 pr-8 text-lg group-hover:text-delgoo-blue transition-colors duration-200">
+          {question}
+        </span>
+        <span
+          className={`text-2xl text-gray-400 flex-shrink-0 transition-transform duration-300 ${
+            isOpen ? 'rotate-45' : ''
+          }`}
+        >
+          +
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="px-6 pb-4 text-gray-600 leading-relaxed">
-          {answer}
-        </div>
+      <div
+        className={`overflow-hidden transition-all duration-400 ease-out ${
+          isOpen ? 'max-h-96 pb-6' : 'max-h-0'
+        }`}
+      >
+        <p className="text-gray-500 leading-relaxed">{answer}</p>
       </div>
     </div>
   );
@@ -39,38 +44,36 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
 interface AccordionProps {
   items: ReadonlyArray<{
     readonly id: number;
-    readonly question: string;
-    readonly answer: string;
+    readonly question: Bilingual;
+    readonly answer: Bilingual;
   }>;
 }
 
-/**
- * Accordion component for FAQ section
- */
 export function Accordion({ items }: AccordionProps) {
-  const [openItems, setOpenItems] = useState<Set<number>>(new Set());
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set([1]));
+  const { t } = useLanguage();
 
   const toggleItem = (id: number) => {
-    const newOpenItems = new Set(openItems);
-    if (newOpenItems.has(id)) {
-      newOpenItems.delete(id);
+    const next = new Set(openItems);
+    if (next.has(id)) {
+      next.delete(id);
     } else {
-      newOpenItems.add(id);
+      next.add(id);
     }
-    setOpenItems(newOpenItems);
+    setOpenItems(next);
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+    <div>
       {items.map((item) => (
         <AccordionItem
           key={item.id}
-          question={item.question}
-          answer={item.answer}
+          question={t(item.question)}
+          answer={t(item.answer)}
           isOpen={openItems.has(item.id)}
           onToggle={() => toggleItem(item.id)}
         />
       ))}
     </div>
   );
-} 
+}
